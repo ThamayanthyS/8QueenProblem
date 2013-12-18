@@ -1,6 +1,6 @@
 package algo;
 
-public class Simmulater {
+public class Simulater {
 
 	private static final int LAST_BOARD_SQUARE = 63;
 	private static final int FIRST_BOARD_SQUARE = 0;
@@ -82,7 +82,7 @@ public class Simmulater {
 		this.currentStabilizer = currentStabilizer;
 	}
 
-	public Simmulater() {
+	public Simulater() {
 		coolingFactor = 0.001;
 		stabilizingFactor = 1.05;
 		freezingTemperature = 0;
@@ -109,7 +109,7 @@ public class Simmulater {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Simmulater s = new Simmulater();
+		Simulater s = new Simulater();
 		// s.generateRandomPositions();
 		// for (int i = 0; i < 100; i++) {
 		// s.doSimulationStep();
