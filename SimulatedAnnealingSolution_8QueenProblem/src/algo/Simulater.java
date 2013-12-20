@@ -24,10 +24,10 @@ public class Simulater {
 	
 
 	public Simulater() {
-		coolingFactor = 0.001;
+		coolingFactor = 0.01;
 		stabilizingFactor = 1.05;
 		freezingTemperature = 0;
-		currentSystemEnergy = 100;
+		currentSystemEnergy = 50;
 		currentSystemTemperature = 0.5;
 		currentStabilizer = 100;
 		currentQueensPositions = new int[NUM_QUEENS][2];
@@ -42,7 +42,7 @@ public class Simulater {
 		for (int i = 0; i < 8; i++) {
 			//System.out.println((Math.random()));
 			currentQueensPositions[i][0] = (int) ((Math.random()*10)%8);
-			currentQueensPositions[i][1] = (int) ((Math.random()*5)%8);
+			currentQueensPositions[i][1] = (int) ((Math.random()*10)%8);
 			// System.out.println(currentQueensPositions[i][0]+""+currentQueensPositions[i][1]);
 			// print();
 
@@ -55,7 +55,7 @@ public class Simulater {
 	}
 
 	public void startSimulator() {
-		Simulater s = new Simulater();
+		//Simulater s = new Simulater();
 		// s.generateRandomPositions();
 		// for (int i = 0; i < 100; i++) {
 		// s.doSimulationStep();
@@ -66,19 +66,20 @@ public class Simulater {
 		System.out.println("\n"+"initial");
 		boolean b = false;
 		int x = 0;
-		while (s.currentSystemEnergy > 0) {
-			System.out.println(s.currentSystemTemperature);
+		while (currentSystemEnergy > 0) {
+			System.out.println(currentSystemTemperature);
 			while (b == false) {
-				b = s.doSimulationStep();
-				 System.out.println(x++);
+				b = doSimulationStep();
+				 
 				x++;
+				System.out.println(x);
 				//s.print();
 			}
-			s.currentSystemTemperature+=0.5;
+			currentSystemTemperature+=50;
 			System.out.println("\n"+"Answer");
-			s.print();
+			print();
 			System.out.println("\n"+"System energy:  ");
-			System.out.println(s.currentSystemEnergy + " " + x);
+			System.out.println(currentSystemEnergy + " " + x);
 		}
 		// }
 
@@ -106,10 +107,11 @@ public class Simulater {
 	public boolean doSimulationStep() {
 		if (currentSystemTemperature > freezingTemperature) {
 			// int currentStabilizer;
+			int k=0;
 			for (int i = 0; i < currentStabilizer; i++) {
 				int newEnergy = generateNeighbor();
 				int energyDelta = newEnergy - currentSystemEnergy;
-
+				System.out.println(k++);
 				if (probabilityFunction(currentSystemTemperature, energyDelta)) {
 					acceptNeighbor();
 					currentSystemEnergy = newEnergy;
