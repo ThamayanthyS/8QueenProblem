@@ -20,6 +20,7 @@ public class Simulater {
 	double currentStabilizer;
 	boolean[][] currentboard;
 	 EightQueenBoard eightQueens;
+	 
 
 	
 
@@ -28,8 +29,8 @@ public class Simulater {
 		stabilizingFactor = 1.05;
 		freezingTemperature = 0;
 		currentSystemEnergy = 50;
-		currentSystemTemperature = 0.5;
-		currentStabilizer = 100;
+		currentSystemTemperature = 5;
+		currentStabilizer = 5;
 		currentQueensPositions = new int[NUM_QUEENS][2];
 		newQueensPositions = new int[NUM_QUEENS][2];
 		
@@ -39,7 +40,7 @@ public class Simulater {
 	        eightQueens.pack();
 		
 		// System.out.println("pppppp");
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < NUM_QUEENS; i++) {
 			//System.out.println((Math.random()));
 			currentQueensPositions[i][0] = (int) ((Math.random()*10)%8);
 			currentQueensPositions[i][1] = (int) ((Math.random()*10)%8);
@@ -73,9 +74,9 @@ public class Simulater {
 				 
 				x++;
 				System.out.println(x);
-				//s.print();
+				print();
 			}
-			currentSystemTemperature+=50;
+			currentSystemTemperature+=.5;
 			System.out.println("\n"+"Answer");
 			print();
 			System.out.println("\n"+"System energy:  ");
@@ -329,7 +330,7 @@ public class Simulater {
 	}
 	
 	public void print() {
-		boolean[][] currentboard = new boolean[8][8];
+		currentboard = new boolean[8][8];
 		for (int i = 0; i < 8; i++) {
 			currentboard[currentQueensPositions[i][0]][currentQueensPositions[i][1]] = true;
 		}
@@ -342,7 +343,7 @@ public class Simulater {
 					System.out.print(" 0");
 			}
 		}
-		eightQueens.loadQueen(getCurrentQueensPositions());
+		eightQueens.loadQueen(getCurrentboard());
         eightQueens.setVisible(true);
         //eightQueens.printBoard();
 	}

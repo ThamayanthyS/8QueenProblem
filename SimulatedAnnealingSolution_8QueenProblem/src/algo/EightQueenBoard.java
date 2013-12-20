@@ -25,7 +25,8 @@ public class EightQueenBoard extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	// declare class constants as needed
-	final int BOARD_DIMENSION = 8;
+	private static final int NUM_QUEENS = 8;
+	final int BOARD_DIMENSION = NUM_QUEENS;
 
 	boolean[][] board;
 
@@ -42,6 +43,14 @@ public class EightQueenBoard extends JFrame {
 	public EightQueenBoard() {
 
 		// gui stuff
+
+		setupBoard();
+
+		// add the squares to the chess panel
+
+	} // end constructor
+
+	public void setupBoard() {
 		setTitle("Simulated Annealing for 8 Queens Problem");
 		setPreferredSize(new Dimension(640, 640));
 		setResizable(false);
@@ -54,10 +63,8 @@ public class EightQueenBoard extends JFrame {
 		blackQueen = new ImageIcon(getClass().getResource("black_queen.png"));
 		whiteIcon = new JLabel("", whiteQueen, JLabel.CENTER);
 		blackIcon = new JLabel("", blackQueen, JLabel.CENTER);
-
-		// add the squares to the chess panel
 		for (int i = 0; i < square.length; i++)// adds chess squares to the
-												// board
+		// board
 		{
 			square[i] = new JPanel(new BorderLayout());
 			square[i].setBackground(Color.BLACK);
@@ -97,26 +104,36 @@ public class EightQueenBoard extends JFrame {
 		}
 		// puts the chess panel on the EightQueens frame
 		add(chessPanel);
-	} // end constructor
+
+	}
 
 	// recursive method solve
-	public boolean loadQueen(int[][] queens) {
+	public boolean loadQueen(boolean[][] queens) {
+		setupBoard();
 
 		board = new boolean[8][8];
 		// The Queen has been placed on the board in column
 		int row, column, i = 0;
-		for (int k = 0; k < 8; k++) {
-			row = queens[k][0];
-			column = queens[k][1];
-			board[row][column] = true;
-			i = row * BOARD_DIMENSION + column;
+		for (int j = 0; j < NUM_QUEENS; j++) {
+			for (int k = 0; k < NUM_QUEENS; k++) {
+				whiteIcon = new JLabel("", whiteQueen, JLabel.CENTER);
+				blackIcon = new JLabel("", blackQueen, JLabel.CENTER);
+				// row = queens[k][0];
+				// column = queens[k][1];
+				// board[row][column] = true;
+				// i = row * BOARD_DIMENSION + column;
+				// i=queens[k][0]*BOARD_DIMENSION+queens[k][1];
+				i = j * NUM_QUEENS + k;
+				if (queens[j][k] == true) {
 
-			if (square[i].getBackground() == Color.BLACK) {
-				square[i].add(blackIcon, BorderLayout.CENTER);
-			} else {
-				square[i].add(whiteIcon, BorderLayout.CENTER);
+					if (square[i].getBackground() == Color.BLACK) {
+						square[i].add(blackIcon, BorderLayout.CENTER);
+					} else {
+						square[i].add(whiteIcon, BorderLayout.CENTER);
+					}
+				}
+				// System.out.println("\nPP"+board[row][column]+i+" "+row+" "+column);
 			}
-			System.out.println("\nPP"+board[row][column]+i+" "+row+" "+column);
 		}
 		/*
 		 * square[0].add(blackIcon, BorderLayout.CENTER);
