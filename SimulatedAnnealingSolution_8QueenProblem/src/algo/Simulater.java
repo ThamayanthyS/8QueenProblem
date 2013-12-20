@@ -1,5 +1,7 @@
 package algo;
 
+import javax.swing.JFrame;
+
 public class Simulater {
 
 	private static final int LAST_BOARD_SQUARE = 63;
@@ -17,70 +19,9 @@ public class Simulater {
 	private int[][] newQueensPositions;
 	double currentStabilizer;
 	boolean[][] currentboard;
+	 EightQueenBoard eightQueens;
 
-	public boolean[][] getCurrentboard() {
-		return currentboard;
-	}
-
-	public void setCurrentboard(boolean[][] currentboard) {
-		this.currentboard = currentboard;
-	}
-
-	public double getCurrentSystemTemperature() {
-		return currentSystemTemperature;
-	}
-
-	public void setCurrentSystemTemperature(double currentSystemTemperature) {
-		this.currentSystemTemperature = currentSystemTemperature;
-	}
-
-	public double getFreezingTemperature() {
-		return freezingTemperature;
-	}
-
-	public void setFreezingTemperature(double freezingTemperature) {
-		this.freezingTemperature = freezingTemperature;
-	}
-
-	public int getCurrentSystemEnergy() {
-		return currentSystemEnergy;
-	}
-
-	public void setCurrentSystemEnergy(int currentSystemEnergy) {
-		this.currentSystemEnergy = currentSystemEnergy;
-	}
-
-	public int[][] getCurrentQueensPositions() {
-		return currentQueensPositions;
-	}
-
-	public void setCurrentQueensPositions(int[][] currentQueensPositions) {
-		this.currentQueensPositions = currentQueensPositions;
-	}
-
-	public double getCoolingFactor() {
-		return coolingFactor;
-	}
-
-	public void setCoolingFactor(double coolingFactor) {
-		this.coolingFactor = coolingFactor;
-	}
-
-	public int[][] getNewQueensPositions() {
-		return newQueensPositions;
-	}
-
-	public void setNewQueensPositions(int[][] newQueensPositions) {
-		this.newQueensPositions = newQueensPositions;
-	}
-
-	public double getCurrentStabilizer() {
-		return currentStabilizer;
-	}
-
-	public void setCurrentStabilizer(double currentStabilizer) {
-		this.currentStabilizer = currentStabilizer;
-	}
+	
 
 	public Simulater() {
 		coolingFactor = 0.001;
@@ -91,42 +32,52 @@ public class Simulater {
 		currentStabilizer = 100;
 		currentQueensPositions = new int[NUM_QUEENS][2];
 		newQueensPositions = new int[NUM_QUEENS][2];
+		
+		 eightQueens = new EightQueenBoard();
+
+	        eightQueens.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        eightQueens.pack();
+		
 		// System.out.println("pppppp");
 		for (int i = 0; i < 8; i++) {
-			currentQueensPositions[i][0] = i;
-			currentQueensPositions[i][1] = i;
+			//System.out.println((Math.random()));
+			currentQueensPositions[i][0] = (int) ((Math.random()*10)%8);
+			currentQueensPositions[i][1] = (int) ((Math.random()*5)%8);
 			// System.out.println(currentQueensPositions[i][0]+""+currentQueensPositions[i][1]);
 			// print();
 
 		}
-
+		
+		
 		// generateNewSolution = null;
 		// generateNeighbor = null;
 		// acceptNeighbor = null;
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+	public void startSimulator() {
 		Simulater s = new Simulater();
 		// s.generateRandomPositions();
 		// for (int i = 0; i < 100; i++) {
 		// s.doSimulationStep();
 		// s.generateNeighbor();
 		// s.acceptNeighbor();
+		
+		//s.print();
+		System.out.println("\n"+"initial");
 		boolean b = false;
 		int x = 0;
 		while (s.currentSystemEnergy > 0) {
 			System.out.println(s.currentSystemTemperature);
 			while (b == false) {
 				b = s.doSimulationStep();
-				// System.out.println(x++);
+				 System.out.println(x++);
 				x++;
+				//s.print();
 			}
 			s.currentSystemTemperature+=0.5;
+			System.out.println("\n"+"Answer");
 			s.print();
-			System.out.println();
+			System.out.println("\n"+"System energy:  ");
 			System.out.println(s.currentSystemEnergy + " " + x);
 		}
 		// }
@@ -311,6 +262,70 @@ public class Simulater {
 	//
 	// return _calculateAttacks(currentQueensPositions);
 	// }
+	public boolean[][] getCurrentboard() {
+		return currentboard;
+	}
+
+	public void setCurrentboard(boolean[][] currentboard) {
+		this.currentboard = currentboard;
+	}
+
+	public double getCurrentSystemTemperature() {
+		return currentSystemTemperature;
+	}
+
+	public void setCurrentSystemTemperature(double currentSystemTemperature) {
+		this.currentSystemTemperature = currentSystemTemperature;
+	}
+
+	public double getFreezingTemperature() {
+		return freezingTemperature;
+	}
+
+	public void setFreezingTemperature(double freezingTemperature) {
+		this.freezingTemperature = freezingTemperature;
+	}
+
+	public int getCurrentSystemEnergy() {
+		return currentSystemEnergy;
+	}
+
+	public void setCurrentSystemEnergy(int currentSystemEnergy) {
+		this.currentSystemEnergy = currentSystemEnergy;
+	}
+
+	public int[][] getCurrentQueensPositions() {
+		return currentQueensPositions;
+	}
+
+	public void setCurrentQueensPositions(int[][] currentQueensPositions) {
+		this.currentQueensPositions = currentQueensPositions;
+	}
+
+	public double getCoolingFactor() {
+		return coolingFactor;
+	}
+
+	public void setCoolingFactor(double coolingFactor) {
+		this.coolingFactor = coolingFactor;
+	}
+
+	public int[][] getNewQueensPositions() {
+		return newQueensPositions;
+	}
+
+	public void setNewQueensPositions(int[][] newQueensPositions) {
+		this.newQueensPositions = newQueensPositions;
+	}
+
+	public double getCurrentStabilizer() {
+		return currentStabilizer;
+	}
+
+	public void setCurrentStabilizer(double currentStabilizer) {
+		this.currentStabilizer = currentStabilizer;
+	}
+	
 	public void print() {
 		boolean[][] currentboard = new boolean[8][8];
 		for (int i = 0; i < 8; i++) {
@@ -325,6 +340,9 @@ public class Simulater {
 					System.out.print(" 0");
 			}
 		}
+		eightQueens.loadQueen(getCurrentQueensPositions());
+        eightQueens.setVisible(true);
+        //eightQueens.printBoard();
 	}
 
 }
